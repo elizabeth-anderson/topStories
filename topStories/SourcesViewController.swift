@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UITableViewController
 {
     var sources = [[String: String]]()
+  
     let apiKey = "5d892509a49046a087917c466fa80d09"
     override func viewDidLoad()
     {
@@ -56,7 +57,19 @@ class ViewController: UITableViewController
     present(alert, animated: true, completion: nil)
     }
     
-   
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return sources.count
+    }
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let source = sources[indexPath.row]
+        cell.textLabel?.text = source["name"]
+        cell.detailTextLabel?.text = source["description"]
+        return cell
+        
+    }
     
     override func didReceiveMemoryWarning()
     {
